@@ -14,10 +14,17 @@
 	<description>leet-code</description>
 
 	<dependencies>
+		<!-- ### Test Tools ### -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- ### Dev Tools ### -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
 

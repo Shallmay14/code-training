@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.problems;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class JJASatisfiabilityOfEqualityEquations {
+public class MJJASatisfiabilityOfEqualityEquations {
 
 	private Map<String, List<String>> sameMap = new HashMap<>();
 	private Map<String, List<String>> diffMap = new HashMap<>();
