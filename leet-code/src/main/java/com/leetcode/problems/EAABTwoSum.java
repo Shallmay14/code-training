@@ -1,15 +1,24 @@
 package com.leetcode.problems;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EAABTwoSum {
 
 	public int[] twoSum(int[] nums, int target) {
 
-		for (var i = 0; i < nums.length; i++)
-			for (var j = i + 1; j < nums.length; j++)
-				if (target == (nums[i] + nums[j]))
-					return new int[] { i, j };
+		Map<Integer, Integer> map = new HashMap<>();
 
-		return new int[0];
+		for (var i = 0; i < nums.length; i++) {
+			int delta = target - nums[i];
+
+			if (map.containsKey(delta))
+				return new int[] { i, map.get(delta) };
+
+			map.put(nums[i], i);
+		}
+
+		return new int[2];
 
 	}
 
