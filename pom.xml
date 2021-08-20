@@ -29,5 +29,6 @@
 
 	<modules>
 		<module>leet-code</module>
+		<module>hackerrank</module>
 	</modules>
 </project>
