@@ -7,38 +7,37 @@ import java.util.Map;
 
 public class GetMostVisited {
 
+	private static int maxValue = 1;
+	private static int minIndex = 1;
+	private static Map<Integer, Integer> visits = new HashMap<>();
+
 	public static int getMostVisited(int n, List<Integer> sprints) {
-		// Write your code here
-		Map<Integer, Integer> visits = new HashMap<>();
-		for (int i = 1; i <= n; i++) {
-			visits.put(i, 0);
-		}
 
 		int start = sprints.get(0);
+
 		for (int i = 1; i < sprints.size(); i++) {
 			int end = sprints.get(i);
-			if (start > end) {
-				for (int j = end; j <= start; j++) {
-					visits.put(j, visits.get(j) + 1);
-				}
-			} else {
-				for (int j = start; j <= end; j++) {
-					visits.put(j, visits.get(j) + 1);
-				}
-			}
+			if (start > end)
+				addValue(end, start);
+			else
+				addValue(start, end);
 			start = end;
 		}
 
-		int max = 1;
-		int maxValue = 0;
-		for (Integer key : visits.keySet()) {
-			if (visits.get(key) > maxValue) {
-				maxValue = visits.get(key);
-				max = key;
+		return minIndex;
+	}
+
+	private static void addValue(int min, int max) {
+		for (int i = min; i <= max; i++) {
+			int value = visits.containsKey(i) ? visits.get(i) + 1 : 1;
+			visits.put(i, value);
+			if (value > maxValue) {
+				minIndex = i;
+				maxValue = value;
+			} else if (value == maxValue && minIndex > i) {
+				minIndex = i;
 			}
 		}
-
-		return max;
 	}
 
 	public static void main(String[] args) {
