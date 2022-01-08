@@ -31,4 +31,5 @@ target/
 # Eclipse
 .classpath
 .project
+.factorypath
 .settings/
