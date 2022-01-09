@@ -15,7 +15,6 @@ public class ECCGInvertBinaryTreeTest {
 	@Test
 	public void test1() {
 		TreeNode res = main.invertTree(TreeUtils.create(new int[] { 4, 2, 7, 1, 3, 6, 9 }));
-		int[] resi = TreeUtils.toList(res);
 		assertEquals(new int[] { 4, 7, 2, 9, 6, 3, 1 }, TreeUtils.toList(res));
 	}
 
