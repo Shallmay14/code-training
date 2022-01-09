@@ -1,6 +1,7 @@
 package com.leetcode.problems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +72,8 @@ public class MJJASatisfiabilityOfEqualityEquations {
 
 	private void updateMap(String v1, boolean compare, String v2) {
 		if (compare) {
-			List<String> nestedList = new ArrayList<>();
-			addElementToMap(v1, v2, sameMap, nestedList);
-			addElementToMap(v2, v1, sameMap, nestedList);
+			addElementToMap(v1, v2, sameMap, new ArrayList<>());
+			addElementToMap(v2, v1, sameMap, new ArrayList<>());
 			mergeElementToMap(v1, v2, diffMap);
 		} else {
 			addElementToMap(v1, v2, diffMap, new ArrayList<>());
@@ -83,21 +83,28 @@ public class MJJASatisfiabilityOfEqualityEquations {
 
 	private void addElementToMap(String key, String val, Map<String, List<String>> usedMap, List<String> nestedList) {
 		if (!nestedList.contains(key)) {
+			List<String> usedList = addElementToMap(key, val, usedMap);
 			nestedList.add(key);
 
-			if (sameMap.containsKey(key)) {
-				for (String same : sameMap.get(key)) {
-					addElementToMap(same, val, usedMap, nestedList);
+			for (String nextVal : usedList) {
+				if (sameMap.containsKey(key)) {
+					for (String same : sameMap.get(key)) {
+						if (!nextVal.equals(same))
+							addElementToMap(same, nextVal, usedMap, nestedList);
+					}
 				}
 			}
-
-			List<String> usedList = new ArrayList<>();
-			if (usedMap.containsKey(key)) {
-				usedList = usedMap.get(key);
-			}
-			usedList.add(val);
-			usedMap.put(key, usedList);
 		}
+	}
+
+	private List<String> addElementToMap(String key, String val, Map<String, List<String>> usedMap) {
+		List<String> usedList = new ArrayList<>();
+		if (usedMap.containsKey(key)) {
+			usedList = usedMap.get(key);
+		}
+		usedList.add(val);
+		usedMap.put(key, usedList);
+		return usedList;
 	}
 
 	private void mergeElementToMap(String key1, String key2, Map<String, List<String>> usedMap) {
