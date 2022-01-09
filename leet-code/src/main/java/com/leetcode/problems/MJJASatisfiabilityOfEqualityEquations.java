@@ -4,88 +4,114 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Map.Entry;
 
 public class MJJASatisfiabilityOfEqualityEquations {
+
+	private static final String EQUAL = "==";
 
 	private Map<String, List<String>> sameMap = new HashMap<>();
 	private Map<String, List<String>> diffMap = new HashMap<>();
 
 	public boolean equationsPossible(String[] equations) {
 
-		if (equations.length <= 1)
-			return true;
-
-		List<Map<String, String>> list = getList(equations);
-
-		return equationsPossible(list);
-	}
-
-	private List<Map<String, String>> getList(String[] equations) {
-
-		List<Map<String, String>> list = new ArrayList<>();
-
 		for (String equ : equations) {
-			Map<String, String> map = new HashMap<>();
-			map.put("v1", equ.substring(0, 1));
-			map.put("compare", equ.substring(1, 3));
-			map.put("v2", equ.substring(3, 4));
-			list.add(map);
-		}
+			String v1 = equ.substring(0, 1);
+			boolean compare = EQUAL.equals(equ.substring(1, 3));
+			String v2 = equ.substring(3, 4);
 
-		return list;
-	}
+			if (!compare && v1.equals(v2))
+				return false;
 
-	private boolean equationsPossible(List<Map<String, String>> list) {
-
-		for (Map<String, String> map : list) {
-			String v1 = map.get("v1");
-			String v2 = map.get("v2");
-
-			if ("==".equals(map.get("compare"))) {
-				if (diffMap.containsKey(v1) && diffMap.get(v1).contains(v2))
-					return false;
-				saveSameOper(v1, v2);
-			} else {
-				if (sameMap.containsKey(v1) && sameMap.get(v1).contains(v2))
-					return false;
-				saveDiffOper(v1, v2);
-			}
+			if (!isComparePass(v1, compare, v2))
+				return false;
 		}
 
 		return true;
 	}
 
-	private void saveDiffOper(String v1, String v2) {
-		List<String> list = new ArrayList<>();
-		if (diffMap.containsKey(v1))
-			list = diffMap.get(v1);
-		list.add(v2);
-
-		// TODO Auto-generated method stub
-
+	private boolean isComparePass(String v1, boolean compare, String v2) {
+		if (!checkSamePass(v1, compare, v2) || !checkDiffPass(v1, compare, v2))
+			return false;
+		updateMap(v1, compare, v2);
+		return true;
 	}
 
-	private void saveSameOper(String v1, String v2) {
-		if (sameMap.containsKey(v1)) {
-			sameMap.get(v1).equals(v2);
+	private boolean checkSamePass(String v1, boolean compare, String v2) {
+		if (compare) {
+			return true;
+		} else {
+			if (!checkMapPass(v1, v2, sameMap))
+				return false;
 		}
-		putTwiceMap(sameMap, v1, v2);
+		return true;
 	}
 
-	private void putTwiceMap(Map<String, List<String>> map, String v1, String v2) {
-		putMap(map, v1, v2);
-		putMap(map, v2, v1);
-	}
-
-	private void putMap(Map<String, List<String>> map, String v1, String v2) {
-		List<String> list = map.get(v1);
-		list.add(v2);
-		if (map.containsKey(v2)) {
-			list = Stream.concat(list.stream(), map.get(v2).stream()).collect(Collectors.toList());
+	private boolean checkDiffPass(String v1, boolean compare, String v2) {
+		if (compare) {
+			if (!checkMapPass(v1, v2, diffMap))
+				return false;
+		} else {
+			return true;
 		}
-		map.put(v1, list);
+		return true;
+	}
+
+	private boolean checkMapPass(String v1, String v2, Map<String, List<String>> checkMap) {
+		for (Map.Entry<String, List<String>> checkEntry : checkMap.entrySet()) {
+			if (findElement(v1, v2, checkEntry) || findElement(v2, v1, checkEntry))
+				return false;
+		}
+		return true;
+	}
+
+	private boolean findElement(String v1, String v2, Entry<String, List<String>> checkEntry) {
+		return checkEntry.getKey().equals(v1) && checkEntry.getValue().contains(v2);
+	}
+
+	private void updateMap(String v1, boolean compare, String v2) {
+		if (compare) {
+			List<String> nestedList = new ArrayList<>();
+			addElementToMap(v1, v2, sameMap, nestedList);
+			addElementToMap(v2, v1, sameMap, nestedList);
+			mergeElementToMap(v1, v2, diffMap);
+		} else {
+			addElementToMap(v1, v2, diffMap, new ArrayList<>());
+			addElementToMap(v2, v1, diffMap, new ArrayList<>());
+		}
+	}
+
+	private void addElementToMap(String key, String val, Map<String, List<String>> usedMap, List<String> nestedList) {
+		if (!nestedList.contains(key)) {
+			nestedList.add(key);
+
+			if (sameMap.containsKey(key)) {
+				for (String same : sameMap.get(key)) {
+					addElementToMap(same, val, usedMap, nestedList);
+				}
+			}
+
+			List<String> usedList = new ArrayList<>();
+			if (usedMap.containsKey(key)) {
+				usedList = usedMap.get(key);
+			}
+			usedList.add(val);
+			usedMap.put(key, usedList);
+		}
+	}
+
+	private void mergeElementToMap(String key1, String key2, Map<String, List<String>> usedMap) {
+		List<String> diffList = new ArrayList<>();
+		if (usedMap.containsKey(key1)) {
+			diffList.addAll(usedMap.get(key1));
+		}
+		if (usedMap.containsKey(key2)) {
+			diffList.addAll(usedMap.get(key2));
+		}
+		if (!diffList.isEmpty()) {
+			usedMap.put(key1, diffList);
+			usedMap.put(key2, diffList);
+		}
 	}
 
 }

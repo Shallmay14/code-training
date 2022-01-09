@@ -40,4 +40,16 @@ public class MJJASatisfiabilityOfEqualityEquationsTest {
 		assertEquals(true, res);
 	}
 
+	@Test
+	public void test6() {
+		boolean res = main.equationsPossible(new String[] { "a!=a" });
+		assertEquals(false, res);
+	}
+
+	@Test
+	public void test7() {
+		boolean res = main.equationsPossible(new String[] { "a==b", "e==c", "b==c", "a!=e" });
+		assertEquals(false, res);
+	}
+
 }
