@@ -10,6 +10,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class MJJASatisfiabilityOfEqualityEquations {
+	
+	// Union Find
+	
+	// 1. 排序
+	// 2. 整理同類
+	// 3. 檢查異類
+	// https://leetcode.com/problems/satisfiability-of-equality-equations/discuss/1645361/Java-Simple-Solution
 
 	private static final String EQUAL = "==";
 
@@ -68,8 +75,8 @@ public class MJJASatisfiabilityOfEqualityEquations {
 		return true;
 	}
 
-	private boolean findElement(String v1, String v2, Entry<String, List<String>> checkEntry) {
-		return checkEntry.getKey().equals(v1) && checkEntry.getValue().contains(v2);
+	private boolean findElement(String key, String val, Entry<String, List<String>> checkEntry) {
+		return checkEntry.getKey().equals(key) && checkEntry.getValue().contains(val);
 	}
 
 	private void updateMap(String v1, boolean compare, String v2) {
@@ -144,12 +151,12 @@ public class MJJASatisfiabilityOfEqualityEquations {
 	}
 
 	public <T> List<T> union(List<T> list1, List<T> list2) {
-		Set<T> set = new HashSet<T>();
+		Set<T> set = new HashSet<>();
 
 		set.addAll(list1);
 		set.addAll(list2);
 
-		return new ArrayList<T>(set);
+		return new ArrayList<>(set);
 	}
 
 }
