@@ -3,9 +3,11 @@ package com.leetcode.problems;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class MJJASatisfiabilityOfEqualityEquations {
 
@@ -17,9 +19,9 @@ public class MJJASatisfiabilityOfEqualityEquations {
 	public boolean equationsPossible(String[] equations) {
 
 		for (String equ : equations) {
-			String v1 = equ.substring(0, 1);
+			var v1 = equ.substring(0, 1);
 			boolean compare = EQUAL.equals(equ.substring(1, 3));
-			String v2 = equ.substring(3, 4);
+			var v2 = equ.substring(3, 4);
 
 			if (!compare && v1.equals(v2))
 				return false;
@@ -72,33 +74,53 @@ public class MJJASatisfiabilityOfEqualityEquations {
 
 	private void updateMap(String v1, boolean compare, String v2) {
 		if (compare) {
-			addElementToMap(v1, v2, sameMap, new ArrayList<>());
-			addElementToMap(v2, v1, sameMap, new ArrayList<>());
+			List<String> sameList = new ArrayList<>();
+			sameList.addAll(Arrays.asList(v1, v2));
+			sameList = getSameListFromSameMap(v1, v2, sameList);
+			sameList = getSameListFromSameMap(v2, v1, sameList);
+			addElementsToSameMap(sameList);
 			mergeElementToMap(v1, v2, diffMap);
 		} else {
-			addElementToMap(v1, v2, diffMap, new ArrayList<>());
-			addElementToMap(v2, v1, diffMap, new ArrayList<>());
+			addElementToDiffMap(v1, v2);
+			addElementToDiffMap(v2, v1);
 		}
 	}
 
-	private void addElementToMap(String key, String val, Map<String, List<String>> usedMap, List<String> nestedList) {
-		if (!nestedList.contains(key)) {
-			List<String> usedList = addElementToMap(key, val, usedMap);
-			nestedList.add(key);
+	private List<String> getSameListFromSameMap(String key, String val, List<String> sameList) {
 
-			for (String nextVal : usedList) {
-				if (sameMap.containsKey(key)) {
-					for (String same : sameMap.get(key)) {
-						if (!nextVal.equals(same))
-							addElementToMap(same, nextVal, usedMap, nestedList);
-					}
-				}
+		if (sameMap.containsKey(key))
+			for (String same : sameMap.get(key))
+				sameList = union(sameList, addElementToMap(same, val, sameMap));
+
+		sameList = union(sameList, addElementToMap(key, val, sameMap));
+
+		return sameList;
+	}
+
+	private void addElementsToSameMap(List<String> sameList) {
+		for (String sameKey : sameList) {
+			List<String> sameListWithoutKey = new ArrayList<>(sameList);
+			sameListWithoutKey.remove(sameKey);
+			sameMap.put(sameKey, sameListWithoutKey);
+		}
+	}
+
+	private void addElementToDiffMap(String key, String val) {
+		addElementToMap(key, val, diffMap);
+
+		if (sameMap.containsKey(key)) {
+			for (String same : sameMap.get(key)) {
+				addElementToMap(same, val, diffMap);
 			}
 		}
 	}
 
 	private List<String> addElementToMap(String key, String val, Map<String, List<String>> usedMap) {
 		List<String> usedList = new ArrayList<>();
+
+		if (key.equals(val))
+			return usedList;
+
 		if (usedMap.containsKey(key)) {
 			usedList = usedMap.get(key);
 		}
@@ -110,15 +132,24 @@ public class MJJASatisfiabilityOfEqualityEquations {
 	private void mergeElementToMap(String key1, String key2, Map<String, List<String>> usedMap) {
 		List<String> diffList = new ArrayList<>();
 		if (usedMap.containsKey(key1)) {
-			diffList.addAll(usedMap.get(key1));
+			diffList = union(diffList, (usedMap.get(key1)));
 		}
 		if (usedMap.containsKey(key2)) {
-			diffList.addAll(usedMap.get(key2));
+			diffList = union(diffList, (usedMap.get(key2)));
 		}
 		if (!diffList.isEmpty()) {
 			usedMap.put(key1, diffList);
 			usedMap.put(key2, diffList);
 		}
+	}
+
+	public <T> List<T> union(List<T> list1, List<T> list2) {
+		Set<T> set = new HashSet<T>();
+
+		set.addAll(list1);
+		set.addAll(list2);
+
+		return new ArrayList<T>(set);
 	}
 
 }
