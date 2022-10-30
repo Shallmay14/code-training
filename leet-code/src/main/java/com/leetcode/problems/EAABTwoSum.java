@@ -1,8 +1,4 @@
 package com.leetcode.problems;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class EAABTwoSum {
 
   public int[] twoSum(int[] nums, int target) {
