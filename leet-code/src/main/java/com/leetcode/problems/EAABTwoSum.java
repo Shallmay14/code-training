@@ -5,21 +5,13 @@ import java.util.Map;
 
 public class EAABTwoSum {
 
-	public int[] twoSum(int[] nums, int target) {
+  public int[] twoSum(int[] nums, int target) {
 
-		Map<Integer, Integer> map = new HashMap<>();
+    for (var i = 0; i < nums.length; i++)
+      for (var j = i + 1; j < nums.length; j++)
+        if (target == (nums[i] + nums[j]))
+          return new int[] {i, j};
 
-		for (var i = 0; i < nums.length; i++) {
-			int delta = target - nums[i];
-
-			if (map.containsKey(delta))
-				return new int[] { i, map.get(delta) };
-
-			map.put(nums[i], i);
-		}
-
-		return new int[2];
-
-	}
-
+    return new int[0];
+  }
 }
