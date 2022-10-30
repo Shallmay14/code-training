@@ -10,23 +10,8 @@
 	</parent>
 
 	<artifactId>leet-code</artifactId>
-	<name>leet-code</name>
-	<description>leet-code</description>
-
-	<properties>
-		<!-- 基本環境設定 -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.11</java.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<!-- 套件版本設定 -->
-		<log4j2.version>2.16.0</log4j2.version>
-		<commons-text.version>1.10.0</commons-text.version>
-		<commons-io.version>2.11.0</commons-io.version>
-		<commons-collections4.version>4.4</commons-collections4.version>
-		<gson.version>2.10</gson.version>
-	</properties>
+	<name>leetcode</name>
+	<description>leetcode</description>
 
 	<dependencies>
 		<!-- ### Test Tools ### -->
