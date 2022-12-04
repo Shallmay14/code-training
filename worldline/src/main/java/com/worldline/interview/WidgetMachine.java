@@ -11,7 +11,16 @@ public class WidgetMachine {
     this.engine = engine;
   }
 
+  public void fill(int fuelLevel) {
+    engine.fill(engine.getRequiredFuelType(), fuelLevel);
+  }
+
   public BigDecimal produceWidgets(int quantity) {
+
+    if(quantity<0){
+      throw new IllegalArgumentException("Quantity needs to be 0 and above.");
+    }
+
     engine.start();
     BigDecimal cost = BigDecimal.ZERO.stripTrailingZeros();
 
@@ -28,13 +37,12 @@ public class WidgetMachine {
     int batch = 0;
     int batchCount = 0;
     FuelType fuelType = engine.getFuelType();
-    BigDecimal costPerBatch = fuelType.getCost();
 
     while (batch < quantity) {
       batch = batch + engine.getBatchSize();
       batchCount++;
     }
 
-    return BigDecimal.valueOf(batchCount).multiply(costPerBatch);
+    return BigDecimal.valueOf(batchCount).multiply(fuelType.getCost());
   }
 }
