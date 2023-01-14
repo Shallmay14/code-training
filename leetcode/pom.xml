@@ -9,7 +9,7 @@
 		<version>0.0.1</version>
 	</parent>
 
-	<artifactId>leet-code</artifactId>
+	<artifactId>leetcode</artifactId>
 	<name>leetcode</name>
 	<description>leetcode</description>
 
