@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.testcases;
 
 import static org.junit.Assert.assertEquals;
 
