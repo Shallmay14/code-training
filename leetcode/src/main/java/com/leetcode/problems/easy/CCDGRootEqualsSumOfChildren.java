@@ -4,6 +4,6 @@ import com.leetcode.models.TreeNode;
 
 public class CCDGRootEqualsSumOfChildren {
     public boolean checkTree(TreeNode root) {
-        return false;
+        return root.val == root.left.val + root.right.val;
     }
 }
