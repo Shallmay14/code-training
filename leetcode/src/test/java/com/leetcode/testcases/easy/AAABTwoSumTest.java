@@ -1,14 +1,14 @@
-package com.leetcode.testcases;
+package com.leetcode.testcases.easy;
 
 import org.junit.Test;
 
-import com.leetcode.problems.EAABTwoSum;
+import com.leetcode.problems.easy.AAABTwoSum;
 
 import static org.junit.Assert.assertArrayEquals;
 
-public class EAABTwoSumTest {
+public class AAABTwoSumTest {
 
-  EAABTwoSum main = new EAABTwoSum();
+  AAABTwoSum main = new AAABTwoSum();
 
   @Test
   public void test1() {

@@ -1,4 +1,4 @@
-package com.leetcode.testcases;
+package com.leetcode.testcases.easy;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import com.leetcode.models.TreeUtils;
 import com.leetcode.models.TreeNode;
-import com.leetcode.problems.ECCGInvertBinaryTree;
+import com.leetcode.problems.easy.ACCGInvertBinaryTree;
 
-public class ECCGInvertBinaryTreeTest {
+public class ACCGInvertBinaryTreeTest {
 
-	ECCGInvertBinaryTree main = new ECCGInvertBinaryTree();
+	ACCGInvertBinaryTree main = new ACCGInvertBinaryTree();
 
 	@Test
 	public void test1() {

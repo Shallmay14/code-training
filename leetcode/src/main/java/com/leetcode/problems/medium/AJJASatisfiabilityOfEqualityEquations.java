@@ -1,4 +1,4 @@
-package com.leetcode.problems;
+package com.leetcode.problems.medium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class MJJASatisfiabilityOfEqualityEquations {
+public class AJJASatisfiabilityOfEqualityEquations {
 	
 	// Union Find
 	

@@ -1,5 +1,5 @@
-package com.leetcode.problems;
-public class EAABTwoSum {
+package com.leetcode.problems.easy;
+public class AAABTwoSum {
 
   public int[] twoSum(int[] nums, int target) {
 

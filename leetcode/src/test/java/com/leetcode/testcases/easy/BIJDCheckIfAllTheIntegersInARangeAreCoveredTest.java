@@ -1,12 +1,12 @@
-package com.leetcode.testcases;
+package com.leetcode.testcases.easy;
 
 import org.junit.Test;
 
-import com.leetcode.problems.EBIJDCheckIfAllTheIntegersInARangeAreCovered;
+import com.leetcode.problems.easy.BIJDCheckIfAllTheIntegersInARangeAreCovered;
 
-public class EBIJDCheckIfAllTheIntegersInARangeAreCoveredTest {
+public class BIJDCheckIfAllTheIntegersInARangeAreCoveredTest {
 
-	EBIJDCheckIfAllTheIntegersInARangeAreCovered main = new EBIJDCheckIfAllTheIntegersInARangeAreCovered();
+	BIJDCheckIfAllTheIntegersInARangeAreCovered main = new BIJDCheckIfAllTheIntegersInARangeAreCovered();
 
 	@Test
 	public void test1() {

@@ -1,8 +1,8 @@
-package com.leetcode.problems;
+package com.leetcode.problems.easy;
 
 import com.leetcode.models.TreeNode;
 
-public class ECCGInvertBinaryTree {
+public class ACCGInvertBinaryTree {
 	public TreeNode invertTree(TreeNode root) {
 		if (root == null)
 			return null;

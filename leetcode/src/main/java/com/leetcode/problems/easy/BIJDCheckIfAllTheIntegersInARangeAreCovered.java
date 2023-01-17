@@ -1,6 +1,6 @@
-package com.leetcode.problems;
+package com.leetcode.problems.easy;
 
-public class EBIJDCheckIfAllTheIntegersInARangeAreCovered {
+public class BIJDCheckIfAllTheIntegersInARangeAreCovered {
 
 	public boolean isCovered(int[][] ranges, int left, int right) {
 

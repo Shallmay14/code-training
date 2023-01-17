@@ -1,14 +1,14 @@
-package com.leetcode.testcases;
+package com.leetcode.testcases.medium;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.leetcode.problems.MJJASatisfiabilityOfEqualityEquations;
+import com.leetcode.problems.medium.AJJASatisfiabilityOfEqualityEquations;
 
-public class MJJASatisfiabilityOfEqualityEquationsTest {
+public class AJJASatisfiabilityOfEqualityEquationsTest {
 
-	MJJASatisfiabilityOfEqualityEquations main = new MJJASatisfiabilityOfEqualityEquations();
+	AJJASatisfiabilityOfEqualityEquations main = new AJJASatisfiabilityOfEqualityEquations();
 
 	@Test
 	public void test1() {
