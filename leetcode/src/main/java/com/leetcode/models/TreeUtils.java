@@ -10,7 +10,7 @@ public class TreeUtils {
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static int[] toList(TreeNode node) {
+	public static Integer[] toList(TreeNode node) {
 		return toArray(toIntegerList(node));
 	}
 
@@ -24,7 +24,7 @@ public class TreeUtils {
 		return toIntegerArray(list);
 	}
 
-	public static TreeNode create(int[] arr) {
+	public static TreeNode create(Integer[] arr) {
 		if (arr.length == 0)
 			return null;
 
@@ -35,7 +35,7 @@ public class TreeUtils {
 		return new TreeNode(arr[0]);
 	}
 
-	private static int[] getLeftArr(int[] arr) {
+	private static Integer[] getLeftArr(Integer[] arr) {
 		var end = 2;
 		var level = 1;
 		var mid = 1;
@@ -53,7 +53,7 @@ public class TreeUtils {
 		return toArray(list);
 	}
 
-	private static int[] getRightArr(int[] arr) {
+	private static Integer[] getRightArr(Integer[] arr) {
 		var end = 2;
 		var level = 1;
 		var mid = 1;
@@ -71,8 +71,8 @@ public class TreeUtils {
 		return toArray(list);
 	}
 
-	private static int[] toArray(List<Integer> list) {
-		var arr = new int[list.size()];
+	private static Integer[] toArray(List<Integer> list) {
+		var arr = new Integer[list.size()];
 		for (var i = 0; i < list.size(); i++)
 			arr[i] = list.get(i);
 		return arr;
@@ -85,8 +85,8 @@ public class TreeUtils {
 		return arr;
 	}
 
-	private static int[] toArray(Integer[] integerList) {
-		var arr = new int[integerList.length];
+	private static Integer[] toArray(Integer[] integerList) {
+		var arr = new Integer[integerList.length];
 		for (var i = 0; i < integerList.length; i++)
 			arr[i] = (int) integerList[i];
 		return arr;

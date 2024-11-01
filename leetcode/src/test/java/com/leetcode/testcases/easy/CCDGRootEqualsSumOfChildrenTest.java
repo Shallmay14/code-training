@@ -13,13 +13,13 @@ public class CCDGRootEqualsSumOfChildrenTest {
 
     @Test
     public void test1() {
-        boolean res = main.checkTree(TreeUtils.create(new int[]{10, 4, 6}));
+        boolean res = main.checkTree(TreeUtils.create(new Integer[]{10, 4, 6}));
         assertTrue(res);
     }
 
     @Test
     public void test2() {
-        boolean res = main.checkTree(TreeUtils.create(new int[]{5, 3, 1}));
+        boolean res = main.checkTree(TreeUtils.create(new Integer[]{5, 3, 1}));
         assertFalse(res);
     }
 }
